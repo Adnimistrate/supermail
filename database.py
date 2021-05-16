@@ -16,29 +16,50 @@ db = SQLAlchemy(app)
 app.config["SECRET_KEY"] = "12345678"
 
 
-# 轮播图
+# 轮播图推荐图
 class banners(db.Model):
     __tablename__ = 'banners'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    link = db.Column(db.String(255), nullable=False)
-    image = db.Column(db.String(1000), nullable=False)
-    # email = db.Column(db.String(50), nullable=False)
-    # password = db.Column(db.String(256), nullable=False)
+    link = db.Column(db.String(120), nullable=False)
+    image = db.Column(db.String(255), nullable=False)
+
+# 推荐图
+
+
+class recommends(db.Model):
+    __tablename__ = 'recommends'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    link = db.Column(db.String(120), nullable=False)
+    image = db.Column(db.String(120), nullable=False)
+    title = db.Column(db.String(10), nullable=False)
 
 
 if __name__ == "__main__":
     db.drop_all()  # 删除原有表单，这个要重点注意，不然容易把别人的东西全删了，真的就从删库到跑路
     db.create_all()  # 创建表单
 
-    k1 = banners(id='1', link='www.baidu.com', image='https://st-gdx.dancf.com/gaodingx/0/uxms/design/20200612-105308-8892.png?x-oss-process=image/resize,w_563/interlace,1,image/format,webp')
-    k2 = banners(id='2', link='www.jd.com', image='https://st-gdx.dancf.com/gaodingx/0/uxms/design/20200527-100503-3f7a.png?x-oss-process=image/resize,w_563/interlace,1,image/format,webp')
-    k3 = banners(id='3', link='http://localhost:8081/', image='https://st-gdx.dancf.com/gaodingx/0/uxms/design/20201103-115306-02b2.png?x-oss-process=image/resize,w_675/interlace,1,image/format,webp')
-    k4 = banners(id='4', link='https://www.bilibili.com/video/BV15741177Eh?p=156', image='https://st-gdx.dancf.com/gaodingx/0/uxms/design/20200527-172041-e00e.png?x-oss-process=image/resize,w_563/interlace,1,image/format,webp')
+    b1 = banners(id='1', link='0', image='https://st-gdx.dancf.com/templets/70744/shots/20190823-095918-b6L_h.png?x-oss-process=image/resize,w_563/interlace,1,image/format,webp')
+    b2 = banners(id='2', link='1', image='https://st-gdx.dancf.com/templets/74795/shots/20191216-174754-5SiJ8.png?x-oss-process=image/resize,w_563/interlace,1,image/format,webp')
+    b3 = banners(id='3', link='2', image='https://st-gdx.dancf.com/gaodingx/0/uxms/design/20200728-170352-0ebb.png?x-oss-process=image/resize,w_563/interlace,1,image/format,webp')
+    b4 = banners(id='4', link='3', image='https://st-gdx.dancf.com/gaodingx/0/uxms/design/20200703-175354-8e7a.png?x-oss-process=image/resize,w_563/interlace,1,image/format,webp')
 
+    r5 = recommends(
+        id='5', link='4', image='https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1398575065,2156416077&fm=26&gp=0.jpg', title='十点抢券')
+    r6 = recommends(
+        id='6', link='5', image='https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=143737326,3330500794&fm=26&gp=0.jpg', title='好物特卖')
+    r7 = recommends(
+        id='7', link='6', image='https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2118667908,3838752433&fm=26&gp=0.jpg', title='内购福利')
+    r8 = recommends(
+        id='8', link='7', image='https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4235146903,118695362&fm=26&gp=0.jpg', title='初秋上新')
     # 加载数据
     db.session.add_all([
-        k1, k2, k3, k4
+        b1, b2, b3, b4
     ])
+
+    db.session.add_all([
+        r5, r6, r7, r8
+    ])
+
     db.session.commit()
 
     app.run(debug=True)
