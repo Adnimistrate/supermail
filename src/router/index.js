@@ -6,6 +6,7 @@ const Home=()=>import('../views/home/Home.vue')
 const Category=()=>import('../views/category/Category.vue')
 const Cart=()=>import('../views/cart/Cart.vue')
 const Profile=()=>import('../views/profile/Profile.vue')
+const Detail=()=>import('../views/detail/detail.vue')
 
 //1.通过Vue.use(插件)，安装插件
 Vue.use(VueRouter)
@@ -30,6 +31,10 @@ const routes=[
   {
     path:'/Profile',
     component:Profile
+  },
+  {
+    path:'/detail/:iid', //要传参数加:aaa
+    component:Detail
   },
 ]
 

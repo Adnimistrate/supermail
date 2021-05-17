@@ -9,6 +9,7 @@
     <tabcontrol class='tabcontrol' :titles="['流行','新款','精选']"
     @tabclick='tabclick'></tabcontrol>  <!-- 因为子组件传了数据点了哪个，这里是监听 -->
     <goodslist :currentgoods='currentgoods'></goodslist>
+    <backtop @click.native='backclick'></backtop> <!-- 我们监听一个组件的原生事件时候要加.native 比如div的点击 -->
     
   </div>
 </template>
@@ -17,11 +18,13 @@
   import homeswiper from './childcomps/homeswiper.vue'
   import homerecommend from './childcomps/homerecommend.vue'
   import featureview from './childcomps/featureview.vue'
+  
   //导入公共组件
   import navbar from '../../components/common/navbar/navbar.vue'
   import tabcontrol from '../../components/content/tabcontrol/tabcontrol.vue'
   import goodslist from '../../components/content/goods/goodslist.vue'
-
+  import backtop from '../../components/common/backtop/backtop.vue'
+  
   //导入网络请求函数
   import {getbannersdata,getrecommendsdata} from '../../network/home.js'
   import {getgoods1data,getgoods2data,getgoods3data} from '../../network/home.js'
@@ -35,6 +38,7 @@ components:{
   navbar,
   tabcontrol,
   goodslist,
+  backtop
 
 },
 
@@ -50,6 +54,7 @@ data() {
 },
 methods: {
   //事件监听子组件方法
+  //goods点击
   tabclick(index){
     switch(index){
       case 0:
@@ -62,8 +67,30 @@ methods: {
         this.currentgoods=this.goods3
         break;
     }
-
-
+  },
+  //回到顶部点击
+  // 点击图片回到顶部方法，加计时器是为了过渡顺滑
+  backclick () {
+      const that = this
+      let timer = setInterval(() => {
+        let ispeed = Math.floor(-that.scrollTop / 5)
+        document.documentElement.scrollTop = document.body.scrollTop = that.scrollTop + ispeed
+        if (that.scrollTop === 0) {
+          clearInterval(timer)
+        }
+      }, 16)
+  },
+ 
+  //为了计算距离顶部的高度，当高度大于60显示回顶部图标，小于60则隐藏
+  scrollToTop () {
+    const that = this
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+    that.scrollTop = scrollTop
+    if (that.scrollTop > 30) {
+      that.btnFlag = true
+    } else {
+      that.btnFlag = false
+    }
   }
 },
 //生命周期函数，创建完成发送网络请求
@@ -96,6 +123,14 @@ created() {
     //保存到全局变量
      this.goods3=result.data
   })
+},
+// vue的两个生命钩子，这里不多解释。
+// window对象，所有浏览器都支持window对象。它表示浏览器窗口，监听滚动事件
+mounted () {
+  window.addEventListener('scroll', this.scrollToTop)
+},
+destroyed () {
+  window.removeEventListener('scroll', this.scrollToTop)
 },
   }
 </script>

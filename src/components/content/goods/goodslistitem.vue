@@ -1,10 +1,10 @@
 <template>
-  <div class="goodslistitem">
-    <img :src="goods1item[2]" alt="">
+  <div class="goodslistitem" @click='itemclick'>
+    <img :src="goodsitem[2]" alt="">
     <div class="goodsinfo">
-      <p>{{goods1item[3]}}</p>
-      <span class="price">{{goods1item[4]}}</span>
-      <span class="collect">{{goods1item[5]}}</span>
+      <p>{{goodsitem[3]}}</p>
+      <span class="price">{{goodsitem[4]}}</span>
+      <span class="collect">{{goodsitem[5]}}</span>
     </div>
   </div>
 </template>
@@ -12,14 +12,20 @@
   export default {
 name:'goodslistitem',
 props:{
-  goods1item:{
+  goodsitem:{
     type:Array,
     default(){
       return []
     }
   }
+},
+  methods: {
+    itemclick(){
+      this.$router.push('/detail/'+this.goodsitem[6])  //+this.goodsitem[6]，router.push直接跳转到某页面不需要引入，只要router的index里面写了就行
+    }
+  },
 
-}
+
   }
   
 </script>

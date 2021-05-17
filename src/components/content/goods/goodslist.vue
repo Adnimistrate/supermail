@@ -1,7 +1,7 @@
 <template>
 
   <div class="goods"> 
-    <goodslistitem v-for='item in currentgoods' :goods1item='item'></goodslistitem><!-- //拿到home数据后在进一步传给gooditem.vue -->
+    <goodslistitem v-for='item in currentgoods' :goodsitem='item'></goodslistitem><!-- //拿到home数据后在进一步传给gooditem.vue -->
 
   </div>
 </template>
