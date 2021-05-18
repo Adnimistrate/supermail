@@ -27,3 +27,31 @@ export function getshopdata(iid) {
     }
   });
 }
+
+export function getproductdata(iid) {
+  return request({
+    url: "/getproductdata/",
+    params:{
+      iid:iid
+    }
+  });
+}
+
+
+export function getproductinfodata(iid) {
+  return request({
+    url: "/getproductinfodata/",
+    params:{
+      iid:iid
+    }
+  });
+}
+
+export function getproductmarkdata(iid) {
+  return request({
+    url: "/getproductmarkdata/",
+    params:{
+      iid:iid
+    }
+  });
+}

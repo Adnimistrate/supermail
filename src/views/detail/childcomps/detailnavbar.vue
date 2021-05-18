@@ -1,5 +1,6 @@
 <template>
-  <navbar class="detailnavbar">
+  <div class="detailnavbar">
+  <navbar >
     <div slot="left" class="back" @click='back'>  <!-- 左边替换为返回按键 -->
       <img src="../../../assets/img/common/back.svg" alt="">
     </div>
@@ -11,6 +12,8 @@
     </div></navbar>
 
   </div>
+  
+</div>
 </template>
 <script>
   import navbar from '../../../components/common/navbar/navbar.vue'
@@ -37,11 +40,11 @@ methods: {
 </script>
 <style>
   .detailnavbar img{
-    margin-top: 10px;
+    margin-top: 3px;
   }
   .title{
     display: flex;
-    padding: 10px 10px;
+    padding: 3px 10px;
     
   }
   .titleitem{

@@ -16,9 +16,13 @@
         <img src="../../../assets/img/common/ture.png">
         {{goodsinfo[11]}}
       </span>
-    <span >
+      <span >
         <img src="../../../assets/img/common/ture.png">
         {{goodsinfo[12]}}
+      </span>
+    <span >
+        <img src="../../../assets/img/common/ture.png">
+        {{goodsinfo[13]}}
     </span>
     </div>
   </div>

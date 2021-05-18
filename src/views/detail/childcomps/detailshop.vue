@@ -46,23 +46,6 @@
       <div class="shop-bottom">
         <div class="enter-shop">进店逛逛</div>
       </div>
-
-      <div>
-        <ul>
-          <li>ddd</li>
-          <li>ddd</li>
-          <li>ddd</li>
-          <li>ddd</li>
-          <li>ddd</li>
-          <li>ddd</li>
-          <li>ddd</li>
-          <li>ddd</li>
-
-          <li>ddd</li><li>ddd</li>
-
-        </ul>
-      </div>
-
     </div>
     
   </div>
@@ -85,7 +68,7 @@ data() {
 },
 filters:{
   sellCountFilter(value){
-    if(value>10000)
+    if(value<10000)
     {
       return value
     }

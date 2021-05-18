@@ -1,11 +1,15 @@
 <template>
   <div class="detail">
-    <detailnavbar></detailnavbar>
+    <detailnavbar class="detailnavbars"></detailnavbar>
     <detaiswiper :detaildata='detaildata'></detaiswiper>
     <detailbaseinfo :goodsinfo='goodsinfo'></detailbaseinfo>
     <detailshop :shopdata='shopdata'></detailshop>
+    <detailproductinfo :productinfodata='productinfodata'></detailproductinfo>
+    <detailproduct :productdata='productdata'></detailproduct>
+    <detailmark :markdatafirst='markdatafirst'></detailmark>
 
     <backtop @click.native='backclick'></backtop>
+
   </div>
 </template>
 <script>
@@ -14,10 +18,13 @@
   import detaiswiper from './childcomps/detailswiper.vue'
   import detailbaseinfo from './childcomps/detailbaseinfo.vue'
   import detailshop from './childcomps/detailshop.vue'
+  import detailproductinfo from './childcomps/detailproductinfo.vue'
+  import detailproduct from './childcomps/detailproduct.vue'
+  import detailmark from './childcomps/detailmark.vue'
 
   import backtop from '../../components/common/backtop/backtop.vue'
 
-  import {getdetailsdata,getgoodsinfo,getshopdata} from '../../network/detail.js'
+  import {getdetailsdata,getgoodsinfo,getshopdata,getproductdata,getproductinfodata,getproductmarkdata} from '../../network/detail.js'
   export default {
 name:'detail',
 components:{
@@ -25,6 +32,9 @@ components:{
   detaiswiper,
   detailbaseinfo,
   detailshop,
+  detailproductinfo,
+  detailproduct,
+  detailmark,
 
   backtop
 },
@@ -34,6 +44,10 @@ data() {
     detaildata:[],
     goodsinfo:[],
     shopdata:[],
+    productdata:[],
+    productinfodata:[],
+    markdatafirst:[],
+    markdataall:[]
   }
 },
 created() {
@@ -45,8 +59,18 @@ created() {
   this.goodsinfo=result.data[0]
   })
   getshopdata(this.iid).then(result=>{
-    console.log(result.data[0]);
   this.shopdata=result.data[0]
+  })
+  getproductdata(this.iid).then(result=>{
+  this.productdata=result.data
+  })
+  getproductinfodata(this.iid).then(result=>{
+  this.productinfodata=result.data[0]
+  })
+  getproductmarkdata(this.iid).then(result=>{
+  console.log(result.data);
+  this.markdataall=result.data
+  this.markdatafirst=result.data[0]
   })
 },
 methods: {
@@ -80,8 +104,19 @@ mounted () {
 destroyed () {
   window.removeEventListener('scroll', this.scrollToTop)
 },
-}
+//打开新页面默认从最上的时候开始
+updated() {
+    window.scroll(0, 0);
+  },
+ }
   
 </script>
 <style>
+    .detailnavbars{
+    position: sticky;  /* 粘性定位 */
+    /* 当我滑到一定位置的时候系统自动会改成fiex */
+    top: 2px; /*就是划着划着这个导航栏会固定住，不会被划上去 */
+    z-index: 9;
+    background-color: rgb(248, 248, 255);
+   } 
 </style>
