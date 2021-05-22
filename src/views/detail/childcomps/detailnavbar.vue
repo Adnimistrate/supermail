@@ -24,13 +24,14 @@ components:{
 },
 data() {
   return {
-    titles:['商品','参数','评论','推荐'],
+    titles:['参数','商品','评论','推荐'],
     currentindex:0
   }
 },
 methods: {
   itemclick(index){
     this.currentindex=index
+    this.$emit('titleclick',index)
   },
   back(){
     this.$router.back()  //router.back就是返回

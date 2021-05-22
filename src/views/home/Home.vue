@@ -9,6 +9,8 @@
     <tabcontrol class='tabcontrol' :titles="['流行','新款','精选']"
     @tabclick='tabclick'></tabcontrol>  <!-- 因为子组件传了数据点了哪个，这里是监听 -->
     <goodslist :currentgoods='currentgoods'></goodslist>
+
+    <tabbarmainitem></tabbarmainitem>
     <backtop @click.native='backclick'></backtop> <!-- 我们监听一个组件的原生事件时候要加.native 比如div的点击 -->
     
   </div>
@@ -24,6 +26,7 @@
   import tabcontrol from '../../components/content/tabcontrol/tabcontrol.vue'
   import goodslist from '../../components/content/goods/goodslist.vue'
   import backtop from '../../components/common/backtop/backtop.vue'
+  import tabbarmainitem from "../../components/content/maintabbar/tabbarmainitem.vue";
   
   //导入网络请求函数
   import {getbannersdata,getrecommendsdata} from '../../network/home.js'
@@ -38,7 +41,8 @@ components:{
   navbar,
   tabcontrol,
   goodslist,
-  backtop
+  backtop,
+  tabbarmainitem
 
 },
 
@@ -98,28 +102,27 @@ created() {
   //调用函数在home.js里面，.then成功后打印结果
 
   getbannersdata().then(result=>{
-    console.log(result);
+
     //保存到全局变量
      this.banners=result.data
   })
   getrecommendsdata().then(result=>{
-    console.log(result);
+
     //保存到全局变量
      this.recommends=result.data
   })
   getgoods1data().then(result=>{
-    console.log(result);
+
     //保存到全局变量
      this.goods1=result.data
      this.currentgoods=result.data  //默认拿第一个数据
   })
   getgoods2data().then(result=>{
-    console.log(result);
+ 
     //保存到全局变量
      this.goods2=result.data
   })
   getgoods3data().then(result=>{
-    console.log(result);
     //保存到全局变量
      this.goods3=result.data
   })

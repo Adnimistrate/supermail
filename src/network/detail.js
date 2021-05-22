@@ -55,3 +55,12 @@ export function getproductmarkdata(iid) {
     }
   });
 }
+
+export function getgoodsrecommanddata(iid) {
+  return request({
+    url: "/getgoodsrecommanddata/",
+    params:{
+      iid:iid
+    }
+  });
+}
